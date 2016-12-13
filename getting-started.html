@@ -76,7 +76,7 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      |     println(<span class="hljs-string">"The result is: "</span> + result)
      |   }
      | }
-s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
+s: scala.spores.<span class="hljs-type">SporeWithEnv</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
 </code></pre>
 </div></div>
 <p>In this example, no transformation is actually performed. Instead, the
@@ -122,7 +122,7 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      |     println(<span class="hljs-string">"The result is: "</span> + result)
      |   }
      | }
-s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
+s: scala.spores.<span class="hljs-type">SporeWithEnv</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
 </code></pre>
 </div></div>
 <p>The body of a spore consists of two parts:</p>
@@ -176,7 +176,7 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
 
        <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-params">name: <span class="hljs-type">String</span>, age: <span class="hljs-type">Int</span></span>)</span>
                   ^
-s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">String</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Person</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
+s: scala.spores.<span class="hljs-type">SporeWithEnv</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">String</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Person</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Person</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
 </code></pre>
 </div></div>
 <p>In the above example, the spore's closure is invalid, and would be rejected
