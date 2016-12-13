@@ -23,6 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .top-bar-right {
   text-align: right;
+  padding-right: 0.9375rem;
 }
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -217,6 +218,25 @@ pre, pre.hljs {
   padding: 0.5rem 1rem;
   line-height: 1.5;
   border: 1px solid #ddd;
+}
+
+.a_codeblock {
+  padding: 0;
+  position: relative;
+}
+
+.a_codeblock .a_sourcelink {
+  position: absolute;
+  top: 0.5rem;
+  right: 1.5rem;
+  border: 1px solid #ddd;
+  padding: 0.1rem 0.5rem;
+  visibility: hidden;
+  background-color: white;
+}
+
+.a_codeblock:hover .a_sourcelink {
+  visibility: visible;
 }
 
 .a_xscroll {
@@ -478,43 +498,17 @@ img.emoji {
     padding-bottom: 1rem;
   }
 }
-li ol li p {
-    margin: 0.5px;
+
+/********** MathJax customization **********/
+
+#MathJax_Message {
+  height: auto;
 }
 
-.a_footer {
-    padding: 0.7rem 0.5rem;
+.MathJax_Preview {
+  color: #999;
 }
 
-body {
-    font-family: "Helvetica Neue", Helvetica, Roboto, "Source Sans Pro", "Segoe UI", Arial, sans-serif;
-    font-size: 17px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Helvetica Neue", Helvetica, Roboto, "Source Sans Pro", "Segoe UI", Arial, sans-serif;
-}
-
-pre, code, kbd, samp {
-    font-family: "Input Mono", "Droid Sans Mono","Source Code Pro",Menlo,Monaco,Consolas,"DejaVu Sans Mono",Inconsolata,monospace;
-}
-li ol li p {
-    margin: 0.5px;
-}
-
-.a_footer {
-    padding: 0.7rem 0.5rem;
-}
-
-body {
-    font-family: "Helvetica Neue", Helvetica, Roboto, "Source Sans Pro", "Segoe UI", Arial, sans-serif;
-    font-size: 17px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Helvetica Neue", Helvetica, Roboto, "Source Sans Pro", "Segoe UI", Arial, sans-serif;
-}
-
-pre, code, kbd, samp {
-    font-family: "Input Mono", "Droid Sans Mono","Source Code Pro",Menlo,Monaco,Consolas,"DejaVu Sans Mono",Inconsolata,monospace;
+div.MathJax_Preview {
+  margin: 1rem 0;
 }

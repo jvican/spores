@@ -5,9 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serializing spores</title>
-    <link rel="stylesheet" href="_theme/css/foundation.min.css">
-    <link rel="stylesheet" href="_theme/css/app.css">
-     <link rel="stylesheet" href="_theme/css/highlight.js/styles/github-gist.css"> 
+    <link rel="stylesheet" href="theme/css/foundation.min.css">
+    <link rel="stylesheet" href="theme/css/app.css">
+     <link rel="stylesheet" href="theme/highlight.js/styles/github-gist.css"> 
+    
   </head>
   <body>
     <div class="expanded row">
@@ -27,7 +28,7 @@
                     <form action="site-search.html" method="get" class="align-right a_search">
                       <input name="q" type="search"  placeholder="Search
 " >
-                      <button><img alt="&#1F50D;" src="_theme/images/images/search.svg" /></button>
+                      <button><img alt="&#1F50D;" src="theme/images/search.svg" /></button>
                     </form>
                   
                 </div>
@@ -39,6 +40,7 @@
             <div class="row">
               
               <main class="columns large-order-2 sections" id="_sections">
+                
                 <h1 id="serializing-spores" class="a_section" data-magellan-target="serializing-spores">Serializing spores<a class="a_hlink" href="#serializing-spores"></a></h1>
 <p>Spores can be serialized using two mechanisms: implicit-based pickling libraries
 or <code class="hljs">{java.io, scala}.Serializable</code>-based libraries. In this tutorial, we will
@@ -50,11 +52,11 @@ runtime. Concretely, this translates into addressing <a href="http://www.cakesol
 <a href="https://databricks.gitbooks.io/databricks-spark-knowledge-base/content/troubleshooting/javaionotserializableexception.html">serialization issues</a> [2].</p>
 <h2 id="installation" class="a_section" data-magellan-target="installation">Installation<a class="a_hlink" href="#installation"></a></h2>
 <p>Add the following sbt settings to your <code class="hljs">build.sbt</code>:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">libraryDependencies += <span class="hljs-string">"ch.epfl.scala"</span> %% <span class="hljs-string">"spores"</span> % <span class="hljs-string">"0.4.3"</span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">libraryDependencies += <span class="hljs-string">"ch.epfl.scala"</span> %% <span class="hljs-string">"spores"</span> % <span class="hljs-string">"0.4.3"</span>
 addCompilerPlugin(<span class="hljs-string">"ch.epfl.scala"</span> %% <span class="hljs-string">"spores-serialization"</span> % <span class="hljs-string">"0.4.3"</span>)
 </code></pre>
-</div>
+</div></div>
 <blockquote class="note">
 <p>These artifacts are only compatible with Scala 2.11.x.
 A <a href="https://issues.scala-lang.org/browse/SI-10009">bug in 2.12.0</a> prevents us from releasing
@@ -71,8 +73,8 @@ are serializable-safe, all the captured variables are checked to be serializable
 <p>With these requirements, <code class="hljs">spores-serialization</code> makes a best effort to ensure the
 correct serializability of your spores.</p>
 <h3 id="an-example" class="a_section" data-magellan-target="an-example">An example<a class="a_hlink" href="#an-example"></a></h3>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
 <span class="hljs-keyword">import</span> scala.spores._
 
 scala&gt; <span class="hljs-keyword">val</span> s = spore {
@@ -86,7 +88,7 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      | }
 s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Boolean</span>]{<span class="hljs-keyword">val</span> captured: (<span class="hljs-type">Int</span>, <span class="hljs-type">String</span>, <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>]); <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
 </code></pre>
-</div>
+</div></div>
 <p>This code snippet compiles because primitives and <code class="hljs">{Scala, Java}</code> collections are serializable.
 In it, we capture an <code class="hljs">Int</code>, a <code class="hljs">String</code> and a <code class="hljs">List[Int]</code> which can be successfully
 sent over the wire.</p>
@@ -149,8 +151,8 @@ are only defined in the current compilation unit, otherwise false positives coul
 Ensure that all the captured variables in your spores are serializable and closed. If you
 have class definitions scattered across different packages, bring them to the same file
 and baptise the class hierarchy with <code class="hljs">sealed</code> and <code class="hljs">final</code> as described before.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">sealed</span> <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Serializable</span></span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">sealed</span> <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Serializable</span></span>
 defined <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span></span>
 
 scala&gt; <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span>(<span class="hljs-params">b: <span class="hljs-type">Int</span></span>) <span class="hljs-keyword">extends</span> <span class="hljs-title">Foo</span></span>
@@ -164,10 +166,10 @@ scala&gt; <span class="hljs-comment">// Force cast to Foo</span>
 foo1: <span class="hljs-type">Foo</span> = <span class="hljs-type">Baz</span>(<span class="hljs-number">1</span>)
 
 scala&gt; <span class="hljs-keyword">val</span> foo2: <span class="hljs-type">Foo</span> = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-foo2: <span class="hljs-type">Foo</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">35</span>c92b68
+foo2: <span class="hljs-type">Foo</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">218220</span>bd
 
 scala&gt; <span class="hljs-keyword">val</span> bar = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-bar: <span class="hljs-type">Bar</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">107</span>d6782
+bar: <span class="hljs-type">Bar</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">71e67</span>d9c
 
 scala&gt; spore {
      |   <span class="hljs-keyword">val</span> capturedFoo1 = foo1
@@ -177,10 +179,10 @@ scala&gt; spore {
      | }
 res1: scala.spores.<span class="hljs-type">NullarySpore</span>[<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: (<span class="hljs-type">Foo</span>, <span class="hljs-type">Foo</span>, <span class="hljs-type">Bar</span>); <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function0&gt;
 </code></pre>
-</div>
+</div></div>
 <p>The previous example compiles as expected. Let's see what happens with an open class hierarchy:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Serializable</span></span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Serializable</span></span>
 defined <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span></span>
 
 scala&gt; <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span>(<span class="hljs-params">b: <span class="hljs-type">Int</span></span>) <span class="hljs-keyword">extends</span> <span class="hljs-title">Foo</span></span>
@@ -194,10 +196,10 @@ scala&gt; <span class="hljs-comment">// Force cast to Foo</span>
 foo1: <span class="hljs-type">Foo</span> = <span class="hljs-type">Baz</span>(<span class="hljs-number">1</span>)
 
 scala&gt; <span class="hljs-keyword">val</span> foo2: <span class="hljs-type">Foo</span> = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-foo2: <span class="hljs-type">Foo</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">2</span>b7ea01f
+foo2: <span class="hljs-type">Foo</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">6554</span>ba66
 
 scala&gt; <span class="hljs-keyword">val</span> bar = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-bar: <span class="hljs-type">Bar</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">13</span>ca900
+bar: <span class="hljs-type">Bar</span> = <span class="hljs-type">Bar</span>@<span class="hljs-number">7</span>c892c9
 
 scala&gt; spore {
      |   <span class="hljs-keyword">val</span> capturedFoo1 = foo1
@@ -214,7 +216,7 @@ scala&gt; spore {
              ^
 res3: scala.spores.<span class="hljs-type">NullarySpore</span>[<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: (<span class="hljs-type">Foo</span>, <span class="hljs-type">Foo</span>, <span class="hljs-type">Bar</span>); <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function0&gt;
 </code></pre>
-</div>
+</div></div>
 <p>Note that capturing subclasses like <code class="hljs">Bar</code> or <code class="hljs">Baz</code> is fine because they are
 final and, by definition, have no subclasses.</p>
 <h4 id="an-escape-hatch" class="a_section" data-magellan-target="an-escape-hatch">An escape hatch<a class="a_hlink" href="#an-escape-hatch"></a></h4>
@@ -222,8 +224,8 @@ final and, by definition, have no subclasses.</p>
 close their class hierarchy. The annotation tells the compiler to assume that the class you're
 capturing is closed, but unfortunately no analysis of the subclasses is performed (SI-7046).
 Therefore, its use is discouraged and only left for intrepid developers that like risk.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
 <span class="hljs-keyword">import</span> scala.spores._
 
 scala&gt; <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Serializable</span></span>
@@ -245,14 +247,14 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      | }
 s: scala.spores.<span class="hljs-type">NullarySpore</span>[<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Foo</span> <span class="hljs-meta">@scala</span>.spores.assumeClosed; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function0&gt;
 </code></pre>
-</div>
+</div></div>
 <h3 id="abstracting-over-the-logic" class="a_section" data-magellan-target="abstracting-over-the-logic">Abstracting over the logic<a class="a_hlink" href="#abstracting-over-the-logic"></a></h3>
 <p>Sooner or later, your logic may become repetitive. <code class="hljs">spores-serialization</code> is capable
 of allowing users to abstract over their logic and define spores in places where
 the captured types are not fully defined.</p>
 <p>For the following code snippet, assume that <code class="hljs">Foo</code> is a closed class hierarchy.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
 <span class="hljs-keyword">import</span> scala.spores._
 
 scala&gt; <span class="hljs-comment">// Foo is now a closed class hierarchy</span>
@@ -273,10 +275,10 @@ scala&gt; <span class="hljs-class"><span class="hljs-keyword">class</span> <span
      | }
 defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Wrapper</span></span>
 </code></pre>
-</div>
+</div></div>
 <p>And if the wrapper is <code class="hljs">Serializable</code>, you can even send it accross the wire:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
 <span class="hljs-keyword">import</span> scala.spores._
 
 scala&gt; <span class="hljs-keyword">sealed</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Wrapper</span>[<span class="hljs-type">T</span> &lt;: <span class="hljs-type">Foo</span>](<span class="hljs-params">val wrapped: <span class="hljs-type">List</span>[<span class="hljs-type">T</span>]</span>) <span class="hljs-keyword">extends</span> <span class="hljs-title">Serializable</span> </span>{
@@ -288,7 +290,7 @@ scala&gt; <span class="hljs-keyword">sealed</span> <span class="hljs-class"><spa
 defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Wrapper</span></span>
 
 scala&gt; <span class="hljs-keyword">val</span> wrapper = <span class="hljs-keyword">new</span> <span class="hljs-type">Wrapper</span>(<span class="hljs-type">List</span>(<span class="hljs-type">Baz</span>(<span class="hljs-string">"Hello"</span>), <span class="hljs-type">Baz</span>(<span class="hljs-string">"Hello"</span>)))
-wrapper: <span class="hljs-type">Wrapper</span>[<span class="hljs-type">Baz</span>] = <span class="hljs-type">Wrapper</span>@<span class="hljs-number">602</span>fcf90
+wrapper: <span class="hljs-type">Wrapper</span>[<span class="hljs-type">Baz</span>] = <span class="hljs-type">Wrapper</span>@<span class="hljs-number">5</span>ba5885d
 
 scala&gt; <span class="hljs-keyword">val</span> s = spore {
      |   <span class="hljs-keyword">val</span> serializedWrapper = wrapper
@@ -296,12 +298,12 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      | }
 s: scala.spores.<span class="hljs-type">NullarySpore</span>[<span class="hljs-type">Wrapper</span>[<span class="hljs-type">Baz</span>]]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Wrapper</span>[<span class="hljs-type">Baz</span>]; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function0&gt;
 </code></pre>
-</div>
+</div></div>
 <p>Note that these examples work because <code class="hljs">Foo</code> is ensured to be an upper bound of
 the type parameter and <code class="hljs">Foo</code> is a closed class hierarchy.</p>
 <p>Users can also set the upper bound to be <code class="hljs">Serializable</code>:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
 <span class="hljs-keyword">import</span> scala.spores._
 
 scala&gt; <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SerializableWrapper</span>[<span class="hljs-type">T</span> &lt;: <span class="hljs-type">Serializable</span>](<span class="hljs-params">val wrapped: <span class="hljs-type">List</span>[<span class="hljs-type">T</span>]</span>) </span>{
@@ -312,7 +314,7 @@ scala&gt; <span class="hljs-class"><span class="hljs-keyword">class</span> <span
      | }
 defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SerializableWrapper</span></span>
 </code></pre>
-</div>
+</div></div>
 <p>But this is totally discouraged as it defeats the purpose of the transitive checker,
 which cannot prove from this point the full serializability of every type parameter of
 <code class="hljs">SerializableWrapper</code>.</p>
@@ -333,8 +335,8 @@ logic of your program.</p>
 To overcome this limitation, the compiler plugin uses implicits to prove that a value class <code class="hljs">FooVal</code> is serializable.
 For proving it, you need to provide an implicit <code class="hljs">CanSerialize[FooVal]</code> in the scope of
 the spore definition.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
 <span class="hljs-keyword">import</span> scala.spores._
 
 scala&gt; <span class="hljs-comment">// Value class definition somewhere</span>
@@ -359,7 +361,7 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      | }
 s: scala.spores.<span class="hljs-type">NullarySpore</span>[<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">FooVal</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function0&gt;
 </code></pre>
-</div>
+</div></div>
 <p>Thanks to the definition of <code class="hljs">FooIsSerializable</code> and the <code class="hljs">import FooImplicit._</code> in the spore
 definition, the compiler plugin is able to prove that the use of <code class="hljs">FooVal</code> is safe.</p>
 <blockquote class="note">
@@ -563,11 +565,11 @@ and propose your ideas to make everyone's life easier.</p>
         </div>
       </footer>
     </div>
-    <script src="_theme/js/jquery.min.js"></script>
-    <script src="_theme/js/what-input.min.js"></script>
-    <script src="_theme/js/foundation.min.js"></script>
+    <script src="theme/js/jquery.min.js"></script>
+    <script src="theme/js/what-input.min.js"></script>
+    <script src="theme/js/foundation.min.js"></script>
     
-    <script src="_theme/js/app.js"></script>
+    <script src="theme/js/app.js"></script>
     
   </body>
 </html>

@@ -5,9 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getting started</title>
-    <link rel="stylesheet" href="_theme/css/foundation.min.css">
-    <link rel="stylesheet" href="_theme/css/app.css">
-     <link rel="stylesheet" href="_theme/css/highlight.js/styles/github-gist.css"> 
+    <link rel="stylesheet" href="theme/css/foundation.min.css">
+    <link rel="stylesheet" href="theme/css/app.css">
+     <link rel="stylesheet" href="theme/highlight.js/styles/github-gist.css"> 
+    
   </head>
   <body>
     <div class="expanded row">
@@ -27,7 +28,7 @@
                     <form action="site-search.html" method="get" class="align-right a_search">
                       <input name="q" type="search"  placeholder="Search
 " >
-                      <button><img alt="&#1F50D;" src="_theme/images/images/search.svg" /></button>
+                      <button><img alt="&#1F50D;" src="theme/images/search.svg" /></button>
                     </form>
                   
                 </div>
@@ -39,6 +40,7 @@
             <div class="row">
               
               <main class="columns large-order-2 sections" id="_sections">
+                
                 <h1 id="getting-started" class="a_section" data-magellan-target="getting-started">Getting started<a class="a_hlink" href="#getting-started"></a></h1>
 <blockquote class="note">
 <p>If you want to use spores for serialization, read the <a href="getting-started.html#basics">Basics</a>
@@ -46,10 +48,10 @@ and jump to the <a href="java-serialization.html">Java Serialization guide</a>.<
 </blockquote>
 <h2 id="installation" class="a_section" data-magellan-target="installation">Installation<a class="a_hlink" href="#installation"></a></h2>
 <p>Add the following sbt settings to your <code class="hljs">build.sbt</code>:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">libraryDependencies += <span class="hljs-string">"ch.epfl.scala"</span> %% <span class="hljs-string">"spores"</span> % <span class="hljs-string">"0.4.3"</span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">libraryDependencies += <span class="hljs-string">"ch.epfl.scala"</span> %% <span class="hljs-string">"spores"</span> % <span class="hljs-string">"0.4.3"</span>
 </code></pre>
-</div>
+</div></div>
 <blockquote class="note">
 <p>This artifacts is only compatible with Scala 2.11.x.
 A <a href="https://issues.scala-lang.org/browse/SI-10009">bug in 2.12.0</a> prevents us from releasing
@@ -57,14 +59,14 @@ a compatible version. <code class="hljs">spores</code> will be probably released
 </blockquote>
 <h2 id="basics" class="a_section" data-magellan-target="basics">Basics<a class="a_hlink" href="#basics"></a></h2>
 <p>To use spores, first import them:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">import</span> scala.spores._
 <span class="hljs-keyword">import</span> scala.spores._
 </code></pre>
-</div>
+</div></div>
 <p>Spores have a few modes of usage. The simplest form is:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
 outerInt: <span class="hljs-type">Int</span> = <span class="hljs-number">1717</span>
 
 scala&gt; <span class="hljs-keyword">val</span> s = spore {
@@ -76,19 +78,19 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      | }
 s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
 </code></pre>
-</div>
+</div></div>
 <p>In this example, no transformation is actually performed. Instead, the
 compiler simply ensures that the spore is <em>well-formed</em>, i.e., anything that's
 captured is explicitly listed as a value definition before the spore's
 closure. This ensures that the enclosing <code class="hljs">this</code> instance is not accidentally
 captured, in this example.</p>
 <p>Spores can also be used in for-comprehensions:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-keyword">for</span> { i &lt;- collection
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-keyword">for</span> { i &lt;- collection
       j &lt;- doSomething(i)
 } <span class="hljs-keyword">yield</span> <span class="hljs-string">s"<span class="hljs-subst">${capture(i)}</span>: result: <span class="hljs-subst">$j</span>"</span>
 </code></pre>
-</div>
+</div></div>
 <p>Here, the fact that a spore is created is implicit, that is, the <code class="hljs">spore</code>
 marker is not used explicitly. Spores come into play because the underlying
 <code class="hljs">map</code> method of the type of <code class="hljs">doSomething(i)</code> takes a spore as a parameter. The
@@ -97,20 +99,20 @@ particular for use in for-comprehensions.</p>
 <p>Finally, a regular function literal can be used as a spore. That is, a method
 that expects a spore can be passed a function literal so long as the function
 literal is well-formed.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sendOverWire</span></span>(s: <span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>]): <span class="hljs-type">Unit</span> = println(s)
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sendOverWire</span></span>(s: <span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>]): <span class="hljs-type">Unit</span> = println(s)
 sendOverWire: (s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Int</span>])<span class="hljs-type">Unit</span>
 
 scala&gt; sendOverWire((x: <span class="hljs-type">Int</span>) =&gt; x * x - <span class="hljs-number">2</span>)
 &lt;function1&gt;
 </code></pre>
-</div>
+</div></div>
 <h2 id="design" class="a_section" data-magellan-target="design">Design<a class="a_hlink" href="#design"></a></h2>
 <p>The main idea behind spores is to provide an alternative way to create
 closure-like objects, in a way where the environment is controlled.</p>
 <p>A spore is created as follows.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
 outerInt: <span class="hljs-type">Int</span> = <span class="hljs-number">1717</span>
 
 scala&gt; <span class="hljs-keyword">val</span> s = spore {
@@ -122,7 +124,7 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
      | }
 s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
 </code></pre>
-</div>
+</div></div>
 <p>The body of a spore consists of two parts:</p>
 <ol>
 <li><strong>the spore header:</strong> a sequence of local value (val) declarations only, and</li>
@@ -131,8 +133,8 @@ s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int
 <p>In general, a <code class="hljs">spore { ... }</code> expression has the following shape.</p>
 <p>Note that the value declarations described in point 1 above can be <code class="hljs">implicit</code>
 but not <code class="hljs">lazy</code>.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">spore {
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">spore {
   <span class="hljs-keyword">val</span> x_1: <span class="hljs-type">T_1</span> = init_1
   ...
   <span class="hljs-keyword">val</span> x_n: <span class="hljs-type">T_n</span> = init_n
@@ -141,7 +143,7 @@ but not <code class="hljs">lazy</code>.</p>
   }
 }
 </code></pre>
-</div>
+</div></div>
 <p>The types <code class="hljs">T_1, ..., T_n</code> can also be inferred.</p>
 <p>The closure of a spore has to satisfy the following rule. All free variables
 of the closure body have to be either:</p>
@@ -151,8 +153,8 @@ of the closure body have to be either:</p>
 <li>marked using <code class="hljs">capture</code> (see corresponding section below), or</li>
 <li><em>statically</em> accessible (members of objects | packages).</li>
 </ol>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-params">name: <span class="hljs-type">String</span>, age: <span class="hljs-type">Int</span></span>)</span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-params">name: <span class="hljs-type">String</span>, age: <span class="hljs-type">Int</span></span>)</span>
 defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>
 
 scala&gt; <span class="hljs-keyword">val</span> outer1 = <span class="hljs-number">0</span>
@@ -176,7 +178,7 @@ scala&gt; <span class="hljs-keyword">val</span> s = spore {
                   ^
 s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">String</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Person</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Nothing</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
 </code></pre>
-</div>
+</div></div>
 <p>In the above example, the spore's closure is invalid, and would be rejected
 during compilation. The reason is that the variable <code class="hljs">outer1</code> is neither a
 parameter of the closure nor one of the spore's value declarations (the only
@@ -188,21 +190,21 @@ design leaves the evaluation semantics unchanged compared to regular closures.
 Basically, leaving out the <code class="hljs">spore</code> marker results in a closure with the same
 runtime behavior.</p>
 <p>For example,</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">spore {
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">spore {
   <span class="hljs-keyword">val</span> l = <span class="hljs-keyword">this</span>.logger
   () =&gt; <span class="hljs-keyword">new</span> <span class="hljs-type">LoggingActor</span>(l)
 }
 </code></pre>
-</div>
+</div></div>
 <p>and</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">{
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">{
   <span class="hljs-keyword">val</span> l = <span class="hljs-keyword">this</span>.logger
   () =&gt; <span class="hljs-keyword">new</span> <span class="hljs-type">LoggingActor</span>(l)
 }
 </code></pre>
-</div>
+</div></div>
 <p>have the same behavior at runtime. The rationale for this design decision is
 that the runtime behavior of closure-heavy code can already be hard to reason
 about. It would become even more difficult if we would introduce additional
@@ -219,10 +221,10 @@ The spore construct is a macro which</p>
 <li>replaces the spore body so that it creates an instance of one of the Spore traits, according to the arity of the closure of the spore.</li>
 </ul>
 <p>The <code class="hljs">Spore</code> trait for spores of arity 1 is declared as follows:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Spore</span>[-<span class="hljs-type">T</span>, +<span class="hljs-type">R</span>] <span class="hljs-keyword">extends</span> <span class="hljs-title">Function1</span>[<span class="hljs-type">T</span>, <span class="hljs-type">R</span>]</span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Spore</span>[-<span class="hljs-type">T</span>, +<span class="hljs-type">R</span>] <span class="hljs-keyword">extends</span> <span class="hljs-title">Function1</span>[<span class="hljs-type">T</span>, <span class="hljs-type">R</span>]</span>
 </code></pre>
-</div>
+</div></div>
 <p>For each function arity there exists a corresponding <code class="hljs">Spore</code> trait of the same
 arity (called <code class="hljs">Spore2</code>, <code class="hljs">Spore3</code>, etc.)</p>
 <h3 id="implicit-conversion" class="a_section" data-magellan-target="implicit-conversion">Implicit Conversion<a class="a_hlink" href="#implicit-conversion"></a></h3>
@@ -235,11 +237,11 @@ conversion has two benefits:</p>
 <p>This conversion is defined as a member of the <code class="hljs">Spore</code> companion object, so
 it's always in the implicit scope when passing a function literal as a method
 argument when a <code class="hljs">Spore</code> is expected. For example, one can do the following:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sendOverWire</span></span>(s: <span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>]): <span class="hljs-type">Unit</span> = println(s)
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sendOverWire</span></span>(s: <span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>]): <span class="hljs-type">Unit</span> = println(s)
 sendOverWire((x: <span class="hljs-type">Int</span>) =&gt; x * x - <span class="hljs-number">2</span>)
 </code></pre>
-</div>
+</div></div>
 <p>This is arguably much lighter-weight than having to declare a spore before
 passing it to <code class="hljs">sendOverWire</code>.</p>
 <p>In general, the implicit conversion will be successful if and only if the
@@ -254,34 +256,34 @@ function value's body is available for the spore macro to check.</p>
 been introduced to assist in the spore checking.</p>
 <p>To see why this is necessary, let's start with an example. Suppose we have a
 type for distributed collections:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">DCollection</span>[<span class="hljs-type">A</span>] </span>{
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">DCollection</span>[<span class="hljs-type">A</span>] </span>{
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">map</span></span>[<span class="hljs-type">B</span>](sp: <span class="hljs-type">Spore</span>[<span class="hljs-type">A</span>, <span class="hljs-type">B</span>]): <span class="hljs-type">DCollection</span>[<span class="hljs-type">B</span>]
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">flatMap</span></span>[<span class="hljs-type">B</span>](sp: <span class="hljs-type">Spore</span>[<span class="hljs-type">A</span>, <span class="hljs-type">DCollection</span>[<span class="hljs-type">B</span>]]): <span class="hljs-type">DCollection</span>[<span class="hljs-type">B</span>]
 }
 </code></pre>
-</div>
+</div></div>
 <p>This type, <code class="hljs">DCollection</code>, might be implemented in a way where the data is
 distributed across machines in a cluster. Thus, the functions passed to <code class="hljs">map</code>,
 <code class="hljs">flatMap</code>, etc. have to be serializable. A simple way to ensure this is to
 require these arguments to be spores. However, we also would like for-comprehensions
 like the following to work:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lookup</span></span>(i: <span class="hljs-type">Int</span>): <span class="hljs-type">DCollection</span>[<span class="hljs-type">Int</span>] = ...
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lookup</span></span>(i: <span class="hljs-type">Int</span>): <span class="hljs-type">DCollection</span>[<span class="hljs-type">Int</span>] = ...
 <span class="hljs-keyword">val</span> indices: <span class="hljs-type">DCollection</span>[<span class="hljs-type">Int</span>] = ...
 
 <span class="hljs-keyword">for</span> { i &lt;- indices
       j &lt;- lookup(i)
 } <span class="hljs-keyword">yield</span> j + i
 </code></pre>
-</div>
+</div></div>
 <p>A problem here is that the desugaring done by the compiler for
 for-comprehensions doesn't know anything about spores. This is what
 the compiler produces from the above expression:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">indices.flatMap(i =&gt; lookup(i).map(j =&gt; j + i))
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">indices.flatMap(i =&gt; lookup(i).map(j =&gt; j + i))
 </code></pre>
-</div>
+</div></div>
 <p>The problem is that <code class="hljs">(j =&gt; j + i)</code> is not a spore. Furthermore, making it a
 spore is not straightforward, as we can't change the way for-comprehensions
 are translated.</p>
@@ -292,26 +294,26 @@ still has the wrong shape. The captured variable <code class="hljs">i</code> is 
 spore header (the list of value definitions preceding the closure within the
 spore), like a spore demands.</p>
 <p>We can overcome this using the <code class="hljs">capture</code> syntax. That is, instead of having to write:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">{
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">{
   <span class="hljs-keyword">val</span> captured = i
   j =&gt; j + i
 }
 </code></pre>
-</div>
+</div></div>
 <p>One can also write:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">(j =&gt; j + capture(i))
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">(j =&gt; j + capture(i))
 </code></pre>
-</div>
+</div></div>
 <p>Thus, the above for-comprehension can be rewritten using spores and <code class="hljs">capture</code>
 as follows:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-keyword">for</span> { i &lt;- indices
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-keyword">for</span> { i &lt;- indices
       j &lt;- lookup(i)
 } <span class="hljs-keyword">yield</span> j + capture(i)
 </code></pre>
-</div>
+</div></div>
 <p>Here, <code class="hljs">i</code> is &quot;captured&quot; as it occurs syntactically after the arrow of another
 generator (it occurs after <code class="hljs">j &lt;- lookup(i)</code>, the second generator in the
 for-comprehension).</p>
@@ -328,8 +330,8 @@ code (see the section <a href="getting-started.html#evaluation-semantics">Evalua
 <p>An invocation of the spore macro expands the spore's body as follows. Given
 the general shape of a spore as shown above, the spore macro produces the
 following code:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-keyword">new</span> &lt;spore implementation <span class="hljs-class"><span class="hljs-keyword">class</span><span class="hljs-title">&gt;</span>[<span class="hljs-type">S_1</span>, ..., <span class="hljs-type">S_m</span>, <span class="hljs-type">R</span>](<span class="hljs-params">{
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-keyword">new</span> &lt;spore implementation <span class="hljs-class"><span class="hljs-keyword">class</span><span class="hljs-title">&gt;</span>[<span class="hljs-type">S_1</span>, ..., <span class="hljs-type">S_m</span>, <span class="hljs-type">R</span>](<span class="hljs-params">{
   val x_1: <span class="hljs-type">T_1</span> = init_1
   ...
   val x_n: <span class="hljs-type">T_n</span> = init_n
@@ -338,7 +340,7 @@ following code:</p>
   }
 })
 </code></pre>
-</div>
+</div></div>
 <p>Note that, after checking, the spore macro need not do any further
 transformation, since implementation details such as unneeded remaining outer
 references are removed by the new backend intended for inclusion in Scala
@@ -346,22 +348,22 @@ references are removed by the new backend intended for inclusion in Scala
 references are already removed by the existing backend.</p>
 <p>The spore implementation classes follow a simple pattern. For example, for
 arity 1, the implementation class is declared as follows:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SporeImpl</span>[-<span class="hljs-type">T</span>, +<span class="hljs-type">R</span>](<span class="hljs-params">f: <span class="hljs-type">T</span> =&gt; <span class="hljs-type">R</span></span>) <span class="hljs-keyword">extends</span> <span class="hljs-title">Spore</span>[<span class="hljs-type">T</span>, <span class="hljs-type">R</span>] </span>{
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SporeImpl</span>[-<span class="hljs-type">T</span>, +<span class="hljs-type">R</span>](<span class="hljs-params">f: <span class="hljs-type">T</span> =&gt; <span class="hljs-type">R</span></span>) <span class="hljs-keyword">extends</span> <span class="hljs-title">Spore</span>[<span class="hljs-type">T</span>, <span class="hljs-type">R</span>] </span>{
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">apply</span></span>(x: <span class="hljs-type">T</span>): <span class="hljs-type">R</span> = f(x)
 }
 </code></pre>
-</div>
+</div></div>
 <h3 id="type-inference" class="a_section" data-magellan-target="type-inference">Type Inference<a class="a_hlink" href="#type-inference"></a></h3>
 <p>Similar to regular functions and closures, the type of a spore should be
 inferred. Inferring the type of a spore amounts to inferring the type
 arguments when instantiating a spore implementation class:</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala"><span class="hljs-keyword">new</span> &lt;spore implementation <span class="hljs-class"><span class="hljs-keyword">class</span><span class="hljs-title">&gt;</span>[<span class="hljs-type">S_1</span>, ..., <span class="hljs-type">S_m</span>, <span class="hljs-type">R</span>](<span class="hljs-params">{
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala"><span class="hljs-keyword">new</span> &lt;spore implementation <span class="hljs-class"><span class="hljs-keyword">class</span><span class="hljs-title">&gt;</span>[<span class="hljs-type">S_1</span>, ..., <span class="hljs-type">S_m</span>, <span class="hljs-type">R</span>](<span class="hljs-params">{
   // ...
 }</span>)</span>
 </code></pre>
-</div>
+</div></div>
 <p>In the above expression, the type arguments <code class="hljs">S_1, ..., S_m</code>, and <code class="hljs">R</code> should be
 inferred from the expected type.</p>
 <p>Our current proposal is to solve this type inference problem in the context of
@@ -509,11 +511,11 @@ SAMs in general to achieve type inference for spores.</p>
         </div>
       </footer>
     </div>
-    <script src="_theme/js/jquery.min.js"></script>
-    <script src="_theme/js/what-input.min.js"></script>
-    <script src="_theme/js/foundation.min.js"></script>
+    <script src="theme/js/jquery.min.js"></script>
+    <script src="theme/js/what-input.min.js"></script>
+    <script src="theme/js/foundation.min.js"></script>
     
-    <script src="_theme/js/app.js"></script>
+    <script src="theme/js/app.js"></script>
     
   </body>
 </html>

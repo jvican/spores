@@ -5,9 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spores</title>
-    <link rel="stylesheet" href="_theme/css/foundation.min.css">
-    <link rel="stylesheet" href="_theme/css/app.css">
-     <link rel="stylesheet" href="_theme/css/highlight.js/styles/github-gist.css"> 
+    <link rel="stylesheet" href="theme/css/foundation.min.css">
+    <link rel="stylesheet" href="theme/css/app.css">
+     <link rel="stylesheet" href="theme/highlight.js/styles/github-gist.css"> 
+    
   </head>
   <body>
     <div class="expanded row">
@@ -27,7 +28,7 @@
                     <form action="site-search.html" method="get" class="align-right a_search">
                       <input name="q" type="search"  placeholder="Search
 " >
-                      <button><img alt="&#1F50D;" src="_theme/images/images/search.svg" /></button>
+                      <button><img alt="&#1F50D;" src="theme/images/search.svg" /></button>
                     </form>
                   
                 </div>
@@ -39,6 +40,7 @@
             <div class="row">
               
               <main class="columns large-order-2 sections" id="_sections">
+                
                 <h1 id="spores" class="a_section" data-magellan-target="spores">Spores<a class="a_hlink" href="#spores"></a></h1>
 <p><a href="https://platform-ci.scala-lang.org/scalacenter/spores"><img src="https://platform-ci.scala-lang.org/api/badges/scalacenter/spores/status.svg" alt="Build Status" /></a>
 <a href="https://gitter.im/scalacenter/spores?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/scalacenter/spores.svg" alt="Gitter" /></a>
@@ -78,8 +80,8 @@ references can be avoided.</p>
 <p>The following example uses Java Serialization to serialize a closure. However,
 serialization fails with a <code class="hljs">NotSerializableException</code> due to the unintended
 capture of a reference to an enclosing object.</p>
-<div class="row">
-<pre class="hljs small-expand columns a_xscroll"><code class="language-scala">scala&gt; <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helper</span>(<span class="hljs-params">name: <span class="hljs-type">String</span></span>)</span>
+<div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
+<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helper</span>(<span class="hljs-params">name: <span class="hljs-type">String</span></span>)</span>
 defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helper</span></span>
 
 scala&gt; <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>{
@@ -92,7 +94,7 @@ scala&gt; <span class="hljs-class"><span class="hljs-keyword">class</span> <span
      | }
 defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span></span>
 </code></pre>
-</div>
+</div></div>
 <p>Given the above class definitions, serializing the <code class="hljs">fun</code> member of an instance
 of <code class="hljs">Main</code> throws a <code class="hljs">NotSerializableException</code>. This is unexpected, since <code class="hljs">fun</code>
 refers only to serializable objects: <code class="hljs">x</code> (an <code class="hljs">Int</code>) and <code class="hljs">helper</code> (an instance
@@ -227,11 +229,11 @@ by <a href="https://heather.miller.am">Heather Miller</a> and <a href="http://la
         </div>
       </footer>
     </div>
-    <script src="_theme/js/jquery.min.js"></script>
-    <script src="_theme/js/what-input.min.js"></script>
-    <script src="_theme/js/foundation.min.js"></script>
+    <script src="theme/js/jquery.min.js"></script>
+    <script src="theme/js/what-input.min.js"></script>
+    <script src="theme/js/foundation.min.js"></script>
     
-    <script src="_theme/js/app.js"></script>
+    <script src="theme/js/app.js"></script>
     
   </body>
 </html>
