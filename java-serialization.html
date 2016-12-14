@@ -166,10 +166,10 @@ and baptise the class hierarchy with <code class="hljs">sealed</code> and <code 
 <span class="hljs-comment">// foo1: Foo = Baz(1)</span>
 
 <span class="hljs-keyword">val</span> foo2: <span class="hljs-type">Foo</span> = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-<span class="hljs-comment">// foo2: Foo = Bar@4c1ea831</span>
+<span class="hljs-comment">// foo2: Foo = Bar@3f947c14</span>
 
 <span class="hljs-keyword">val</span> bar = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-<span class="hljs-comment">// bar: Bar = Bar@ed06ba7</span>
+<span class="hljs-comment">// bar: Bar = Bar@2d886333</span>
 
 spore {
   <span class="hljs-keyword">val</span> capturedFoo1 = foo1
@@ -196,10 +196,10 @@ spore {
 <span class="hljs-comment">// foo1: Foo = Baz(1)</span>
 
 <span class="hljs-keyword">val</span> foo2: <span class="hljs-type">Foo</span> = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-<span class="hljs-comment">// foo2: Foo = Bar@46b6b98f</span>
+<span class="hljs-comment">// foo2: Foo = Bar@11b9791e</span>
 
 <span class="hljs-keyword">val</span> bar = <span class="hljs-keyword">new</span> <span class="hljs-type">Bar</span>(<span class="hljs-number">2</span>)
-<span class="hljs-comment">// bar: Bar = Bar@6d3d4f51</span>
+<span class="hljs-comment">// bar: Bar = Bar@5e43b04d</span>
 
 spore {
   <span class="hljs-keyword">val</span> capturedFoo1 = foo1
@@ -290,7 +290,7 @@ the captured types are not fully defined.</p>
 <span class="hljs-comment">// defined class Wrapper</span>
 
 <span class="hljs-keyword">val</span> wrapper = <span class="hljs-keyword">new</span> <span class="hljs-type">Wrapper</span>(<span class="hljs-type">List</span>(<span class="hljs-type">Baz</span>(<span class="hljs-string">"Hello"</span>), <span class="hljs-type">Baz</span>(<span class="hljs-string">"Hello"</span>)))
-<span class="hljs-comment">// wrapper: Wrapper[Baz] = Wrapper@3e0d56f3</span>
+<span class="hljs-comment">// wrapper: Wrapper[Baz] = Wrapper@5a05f394</span>
 
 <span class="hljs-keyword">val</span> s = spore {
   <span class="hljs-keyword">val</span> serializedWrapper = wrapper
