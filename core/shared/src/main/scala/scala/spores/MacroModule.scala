@@ -48,6 +48,7 @@ private[spores] class MacroModule[C <: whitebox.Context](val c: C) {
     }
   }
 
+  val sporeInfoSym = symbolOf[scala.spores.sporeInfo[Any, Any]]
   def convertSpore(sporeTree: c.Tree,
                    expectedCaptured: c.Type,
                    expectedExcluded: c.Type): c.Tree = {
@@ -71,14 +72,16 @@ private[spores] class MacroModule[C <: whitebox.Context](val c: C) {
         case t => t
       }
 
+      val newSporeInfo = q"new scala.spores.sporeInfo[$captured, $expectedExcluded]()"
+      val newMods = mods.mapAnnotations(anns => newSporeInfo :: anns)
       val newBody = body.map(t => rewriter.transform(t))
       val newImpl = treeCopy.Template(tmpl, tmpl.parents, tmpl.self, newBody)
-      treeCopy.ClassDef(sporeDefinition, mods, newName, tparams, newImpl)
+      treeCopy.ClassDef(sporeDefinition, newMods, newName, tparams, newImpl)
     })
 
     val q"new ${_}(...$init)" = instantiation
     val conversion = q"""{
-      $newSporeDef: @scala.spores.sporeInfo[$captured, $expectedExcluded]
+      $newSporeDef
       new $newName(...$init)
     }"""
     debug(s"Generated conversion:\n$conversion")

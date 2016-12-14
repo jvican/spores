@@ -113,6 +113,8 @@ lazy val `spores-core` = crossProject
   .settings(allSettings: _*)
   .settings(baseDependencies: _*)
   .settings(
+    libraryDependencies +=
+      "org.scala-lang" % "scala-compiler" % scalaVersion.value,
     resourceDirectory in Compile := baseDirectory.value / "resources",
     parallelExecution in Test := false,
     /* Write all the compile-time dependencies of the spores macro to a file,
@@ -132,15 +134,8 @@ lazy val `spores-core` = crossProject
       List(toolboxTestClasspath.getAbsoluteFile)
     }.taskValue
   )
-  .jvmSettings(
-    fork in Test := true,
-    libraryDependencies +=
-      "org.scala-lang" % "scala-compiler" % scalaVersion.value
-  )
-  .jsSettings(
-    libraryDependencies +=
-      "org.scala-lang" %%% "scala-compiler" % scalaVersion.value
-  )
+  .jsSettings()
+  .jvmSettings(fork in Test := true)
 
 lazy val `spores-core-jvm` = `spores-core`.jvm
 lazy val `spores-core-js` = `spores-core`.js
