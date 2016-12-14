@@ -66,17 +66,17 @@ a compatible version. <code class="hljs">spores</code> will be probably released
 </div></div>
 <p>Spores have a few modes of usage. The simplest form is:</p>
 <div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
-<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
-outerInt: <span class="hljs-type">Int</span> = <span class="hljs-number">1717</span>
+<pre class="hljs"><code class="language-scala"><span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
+<span class="hljs-comment">// outerInt: Int = 1717</span>
 
-scala&gt; <span class="hljs-keyword">val</span> s = spore {
-     |   <span class="hljs-keyword">val</span> i = outerInt
-     |   (x: <span class="hljs-type">Int</span>) =&gt; {
-     |     <span class="hljs-keyword">val</span> result = x + <span class="hljs-string">" "</span> + i.toString
-     |     println(<span class="hljs-string">"The result is: "</span> + result)
-     |   }
-     | }
-s: scala.spores.<span class="hljs-type">SporeWithEnv</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
+<span class="hljs-keyword">val</span> s = spore {
+  <span class="hljs-keyword">val</span> i = outerInt
+  (x: <span class="hljs-type">Int</span>) =&gt; {
+    <span class="hljs-keyword">val</span> result = x + <span class="hljs-string">" "</span> + i.toString
+    println(<span class="hljs-string">"The result is: "</span> + result)
+  }
+}
+<span class="hljs-comment">// s: scala.spores.SporeWithEnv[Int,Unit]{val captured: Int; type Captured = Int; type Excluded = Nothing} = &lt;function1&gt;</span>
 </code></pre>
 </div></div>
 <p>In this example, no transformation is actually performed. Instead, the
@@ -100,11 +100,11 @@ particular for use in for-comprehensions.</p>
 that expects a spore can be passed a function literal so long as the function
 literal is well-formed.</p>
 <div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
-<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sendOverWire</span></span>(s: <span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>]): <span class="hljs-type">Unit</span> = println(s)
-sendOverWire: (s: scala.spores.<span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Int</span>])<span class="hljs-type">Unit</span>
+<pre class="hljs"><code class="language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sendOverWire</span></span>(s: <span class="hljs-type">Spore</span>[<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>]): <span class="hljs-type">Unit</span> = println(s)
+<span class="hljs-comment">// sendOverWire: (s: scala.spores.Spore[Int,Int])Unit</span>
 
-scala&gt; sendOverWire((x: <span class="hljs-type">Int</span>) =&gt; x * x - <span class="hljs-number">2</span>)
-&lt;function1&gt;
+sendOverWire((x: <span class="hljs-type">Int</span>) =&gt; x * x - <span class="hljs-number">2</span>)
+<span class="hljs-comment">// &lt;function1&gt;</span>
 </code></pre>
 </div></div>
 <h2 id="design" class="a_section" data-magellan-target="design">Design<a class="a_hlink" href="#design"></a></h2>
@@ -112,17 +112,17 @@ scala&gt; sendOverWire((x: <span class="hljs-type">Int</span>) =&gt; x * x - <sp
 closure-like objects, in a way where the environment is controlled.</p>
 <p>A spore is created as follows.</p>
 <div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
-<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
-outerInt: <span class="hljs-type">Int</span> = <span class="hljs-number">1717</span>
+<pre class="hljs"><code class="language-scala"><span class="hljs-keyword">val</span> outerInt = <span class="hljs-number">1717</span>
+<span class="hljs-comment">// outerInt: Int = 1717</span>
 
-scala&gt; <span class="hljs-keyword">val</span> s = spore {
-     |   <span class="hljs-keyword">val</span> i = outerInt
-     |   (x: <span class="hljs-type">Int</span>) =&gt; {
-     |     <span class="hljs-keyword">val</span> result = x + <span class="hljs-string">" "</span> + i.toString
-     |     println(<span class="hljs-string">"The result is: "</span> + result)
-     |   }
-     | }
-s: scala.spores.<span class="hljs-type">SporeWithEnv</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">Unit</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Int</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
+<span class="hljs-keyword">val</span> s = spore {
+  <span class="hljs-keyword">val</span> i = outerInt
+  (x: <span class="hljs-type">Int</span>) =&gt; {
+    <span class="hljs-keyword">val</span> result = x + <span class="hljs-string">" "</span> + i.toString
+    println(<span class="hljs-string">"The result is: "</span> + result)
+  }
+}
+<span class="hljs-comment">// s: scala.spores.SporeWithEnv[Int,Unit]{val captured: Int; type Captured = Int; type Excluded = Nothing} = &lt;function1&gt;</span>
 </code></pre>
 </div></div>
 <p>The body of a spore consists of two parts:</p>
@@ -154,29 +154,20 @@ of the closure body have to be either:</p>
 <li><em>statically</em> accessible (members of objects | packages).</li>
 </ol>
 <div class="row"><div class="a_linked small-expand columns a_xscroll a_codeblock">
-<pre class="hljs"><code class="language-scala">scala&gt; <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-params">name: <span class="hljs-type">String</span>, age: <span class="hljs-type">Int</span></span>)</span>
-defined <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>
-
-scala&gt; <span class="hljs-keyword">val</span> outer1 = <span class="hljs-number">0</span>
-outer1: <span class="hljs-type">Int</span> = <span class="hljs-number">0</span>
-
-scala&gt; <span class="hljs-keyword">val</span> outer2 = <span class="hljs-type">Person</span>(<span class="hljs-string">"Jim"</span>, <span class="hljs-number">35</span>)
-outer2: <span class="hljs-type">Person</span> = <span class="hljs-type">Person</span>(<span class="hljs-type">Jim</span>,<span class="hljs-number">35</span>)
-
-scala&gt; <span class="hljs-keyword">val</span> s = spore {
-     |   <span class="hljs-keyword">val</span> inner = outer2
-     |   (x: <span class="hljs-type">Int</span>) =&gt; {
-     |     <span class="hljs-string">s"The result is: <span class="hljs-subst">${x + inner.age + outer1}</span>"</span>
-     |   }
-     | }
-&lt;console&gt;:<span class="hljs-number">15</span>: warning: <span class="hljs-type">Detected</span> open <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">hierarchy</span> <span class="hljs-title">in</span> `<span class="hljs-title">class</span> <span class="hljs-title">Person</span>`.</span>
-  <span class="hljs-type">Transitive</span> inspection cannot ensure that <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-title">is</span> <span class="hljs-title">not</span> <span class="hljs-title">being</span> <span class="hljs-title">extended</span> <span class="hljs-title">somewhere</span> <span class="hljs-title">else</span>. <span class="hljs-title">For</span> <span class="hljs-title">a</span> <span class="hljs-title">complete</span> <span class="hljs-title">serializable</span> <span class="hljs-title">check</span>, <span class="hljs-title">class</span> <span class="hljs-title">hierarchies</span> <span class="hljs-title">need</span> <span class="hljs-title">to</span> <span class="hljs-title">be</span> <span class="hljs-title">closed</span>.</span>
-
-<span class="hljs-type">Solution</span>: <span class="hljs-type">Close</span> the <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">hierarchy</span> <span class="hljs-title">by</span> <span class="hljs-title">marking</span> <span class="hljs-title">super</span> <span class="hljs-title">classes</span> <span class="hljs-title">as</span> `<span class="hljs-title">sealed</span>` <span class="hljs-title">and</span> <span class="hljs-title">sub</span> <span class="hljs-title">classes</span> <span class="hljs-title">as</span> `<span class="hljs-title">final</span>`.</span>
-
-       <span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-params">name: <span class="hljs-type">String</span>, age: <span class="hljs-type">Int</span></span>)</span>
-                  ^
-s: scala.spores.<span class="hljs-type">SporeWithEnv</span>[<span class="hljs-type">Int</span>,<span class="hljs-type">String</span>]{<span class="hljs-keyword">val</span> captured: <span class="hljs-type">Person</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Captured</span> </span>= <span class="hljs-type">Person</span>; <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Excluded</span> </span>= <span class="hljs-type">Nothing</span>} = &lt;function1&gt;
+<pre class="hljs"><code class="language-scala">{
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-params">name: <span class="hljs-type">String</span>, age: <span class="hljs-type">Int</span></span>)</span>
+<span class="hljs-keyword">val</span> outer1 = <span class="hljs-number">0</span>
+<span class="hljs-keyword">val</span> outer2 = <span class="hljs-type">Person</span>(<span class="hljs-string">"Jim"</span>, <span class="hljs-number">35</span>)
+<span class="hljs-keyword">val</span> s = spore {
+  <span class="hljs-keyword">val</span> inner = outer2
+  (x: <span class="hljs-type">Int</span>) =&gt; {
+    <span class="hljs-string">s"The result is: <span class="hljs-subst">${x + inner.age + outer1}</span>"</span>
+  }
+}
+}
+<span class="hljs-comment">// &lt;console&gt;:23: error: Spore contains references to an invalid symbol: value outer1.</span>
+<span class="hljs-comment">//            s"The result is: ${x + inner.age + outer1}"</span>
+<span class="hljs-comment">//                                               ^</span>
 </code></pre>
 </div></div>
 <p>In the above example, the spore's closure is invalid, and would be rejected
