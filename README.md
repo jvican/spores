@@ -14,7 +14,7 @@ of functions based on types, having more control over the function's environment
 
 Spores comes with a transitive checker to ensure that captured types can be
 serialized by the JVM (Java serialization). For more information, check the
-[motivation and the getting-started](java-serialization.md) guide.
+[motivation and the getting-started](https://scalacenter.github.io/spores/java-serialization.html) guide.
 
 ## Add to your project
 
